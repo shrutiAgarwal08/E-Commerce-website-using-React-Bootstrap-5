@@ -4,9 +4,9 @@ import Item from '../components/Item';
 import { useParams } from 'react-router-dom';
 
 const ShopByCategory = (props) => {
-
-  const { ProductData } = useContext(ShopContext);
+  const { productData } = useContext(ShopContext);
   const { subcategory } = useParams();
+  
   return (
     <div className='overflow-hidden mx-5 my-4 '>
       <div className='row shopCategoryIndexSort'>
@@ -21,7 +21,7 @@ const ShopByCategory = (props) => {
         </small>
       </div>
       <div className='row row-cols-1 gx-5 gy-2 shopCategoryProducts my-4 row-cols-md-4 row-cols-sm-2'>
-        {ProductData.map((item) => {
+        {productData.map((item) => {
           // console.log('Current item category:', item.category);
           // console.log('Provided category:', props.category);
           if (props.category === item.category) {

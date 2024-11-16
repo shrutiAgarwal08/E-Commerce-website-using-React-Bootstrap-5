@@ -5,7 +5,7 @@ import { BiRupee } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 const CartItems = () => {
-    const { ProductData,cartItems,removeFromCart,getTotalCartAmount} = useContext(ShopContext);
+    const { productData,cartItems,removeFromCart,getTotalCartAmount} = useContext(ShopContext);
     return (
         <>
             <table className='container table cartItemsFormatMain m-5 mb-5 col-10 col-sm-10 col-md-10 '>
@@ -20,10 +20,10 @@ const CartItems = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {ProductData.map((e)=>{
+                {productData.map((e)=>{
                             if(cartItems[e.id] && cartItems[e.id]>0){
                                 return <tr className='cartItemsFormat' key={e.id}>
-                                        <td><img src={e.img} alt='error' className='cartItemsProductIcon ' style={{"width":"100px","height":"100px"}}/></td>
+                                        <td><img src={`http://localhost:8080${e.img}`} alt='error' className='cartItemsProductIcon ' style={{"width":"100px","height":"100px"}}/></td>
                                         <td >{e.title}</td>
                                         <td><BiRupee className="align-bottom" />{e.price}</td>
                                         <td><button className='cartItemsQuantity btn btn-outline-secondary rounded-0'>{cartItems[e.id]}</button></td>

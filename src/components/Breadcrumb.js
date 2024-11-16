@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Breadcrumb = (props) => {
   const { product } = props;
+  
   return (
     <nav className='overflow-hidden mx-5 my-4 col-10 col-sm-11 col-md-11' aria-label='breadcrumb' style={{ '--bs-breadcrumb-divider': "'>'" }}>
       <ol className='breadcrumb'>

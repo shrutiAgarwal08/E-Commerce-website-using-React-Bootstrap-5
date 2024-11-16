@@ -1,52 +1,65 @@
-import React, { createContext, useState } from 'react';
-import { ProductData } from '../Assets/ProductData';
-
+import React, { createContext, useState,useEffect } from 'react';
+import axiosInstance from '../api/axiosConfig';
 export const ShopContext = createContext(null);
-const getDefaultCart =()=>{
-    let cart = {};
-    for (let index=0; index< ProductData.length+1 ; index++) {
-        cart[index]=0;
-    }
-    return cart;
-}
 
 const ShopContextProvider =(props)=>{
-    const [cartItems, setCartItems] = useState(getDefaultCart());
+    const [productData,setProductData]=useState([]);
+    const[featuredProducts,setFeaturedProducts]=useState([]);
+    const [cartItems, setCartItems] = useState({});
 //  console.log(ProductData);
+//console.log('Fetched Product Data:',productData);
+useEffect(()=>{
+    axiosInstance.get('/api/products')
+    .then(res=>{
+        setProductData(res.data);
+
+        const initialCart= res.data.reduce((cart,product)=>{
+        cart[product.id]=0;
+        return cart;
+    },{});
+    setCartItems(initialCart);
+    })
+    .catch(err=>console.error("Error fetching product data:",err));
+
+    axiosInstance.get('/api/products/featured')
+    .then(res=>setFeaturedProducts(res.data))
+    .catch(err=>console.error("Error fetching featured products:",err));
+},[]);
+
     const addToCart=(itemId)=>{
-        setCartItems((prev)=>({ ...prev,[itemId]:prev[itemId]+1}))
-    }
+        setCartItems((prev)=>({ ...prev,[itemId]:prev[itemId]+1}));
+    };
     const removeFromCart=(itemId)=>{
-        setCartItems((prev) => ({ ...prev,[itemId]:prev[itemId]-1}))
-    }
+        setCartItems((prev)=>({ ...prev,[itemId]:prev[itemId]-1}));
+    };
 
     const getTotalCartAmount=()=>{
         let totalAmount = 0;
-        for(const item in cartItems){
-            if(cartItems[item]>0){
-                let itemInfo = ProductData.find((product)=>product.id === Number(item));
-                totalAmount += itemInfo.price*cartItems[item];
+        for(let product of productData){
+            let quantity=0;
+            if(cartItems[product.id]!==undefined){
+                quantity=cartItems[product.id];
             }
+            totalAmount += product.price*quantity;
         }
         return totalAmount;
     }
 
     const getTotalCartItems=()=>{
         let totalItem = 0;
-        for (const item in cartItems) {
-            if (cartItems[item] > 0) {
-                totalItem += cartItems[item];
-            }
+        for (let itemId in cartItems) {
+                totalItem += cartItems[itemId];
         }
         return totalItem;
     }
 
-    const contextValue = {ProductData , cartItems, addToCart, removeFromCart, getTotalCartAmount, getTotalCartItems };
+    const contextValue = {productData ,featuredProducts, cartItems, addToCart, removeFromCart, getTotalCartAmount, getTotalCartItems };
 
     return (
         <ShopContext.Provider value={contextValue}>
             {props.children}
         </ShopContext.Provider>
-    )
-}
+    );
+};
+
 export default ShopContextProvider;

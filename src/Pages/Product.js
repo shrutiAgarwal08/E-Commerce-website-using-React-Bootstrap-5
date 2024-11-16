@@ -8,16 +8,20 @@ import DescriptionBox from '../components/DescriptionBox';
 import RelatedProducts from '../components/RelatedProducts';
 
 const Product = () => {
-  const {ProductData} = useContext(ShopContext);
+  const {productData} = useContext(ShopContext);
   const {productId} = useParams();
-  const product = ProductData.find((e)=> e.id === Number(productId));
+  const product = productData.find((e)=> e.id === Number(productId));
+
+  if(product===undefined){
+    return <p>Product not found.</p>;
+  }
   return (
     <>
-    <Breadcrumb product = {product} />
-    <ProductDisplay product = {product} />
-    <DescriptionBox/>
-    <RelatedProducts category={product.category}/>
-   </>
+     <Breadcrumb product = {product} />
+     <ProductDisplay product = {product} />
+     <DescriptionBox/>
+     <RelatedProducts category={product.category}/>
+    </>
   )
 }
 

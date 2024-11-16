@@ -18,7 +18,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path='/' element={<Home />}></Route>
-          <Route path='shop' element={<Home/>}></Route>
+          <Route path='/shop' element={<Home/>}></Route>
           <Route path='/men' element={<ShopByCategory category="MEN" />}/>
           <Route path='/men/:subcategory' element={<ShopByCategory category="MEN" />} />
           <Route path='/women' element={<ShopByCategory category="WOMEN" />} />
@@ -28,9 +28,9 @@ function App() {
           <Route path='/homeandliving' element={<ShopByCategory category="HomeAndLiving" />} />
           <Route path='/homeandliving/:subcategory' element={<ShopByCategory category="HomeAndLiving" />} />
           <Route path="/product" element={<Product />}>
-            <Route path=':productId' element={<Product />} />
+            <Route path=':productId' element={<Product/>} />
           </Route>
-          <Route path='/SignUpModal' element={<SignUpModal />}/>
+          <Route path='/SignUpModal' element={<SignUpModal/>}/>
           <Route path='/Login' element={<Login/>}/>
           <Route path='/Cart' element={<Cart/>}/>
         </Routes>

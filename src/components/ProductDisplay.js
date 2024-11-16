@@ -11,20 +11,20 @@ const ProductDisplay = (props) => {
       <div className='col-md-6 col-sm-12 col-12 productDisplayLeft me-5 ' >
         <div className='row' style={{"width":"100%","objectFit":"cover"}}>
         <div className='col-3 col-sm-3 col-md-3 d-grid gap-4 productDisplayImageList' >
-          <img src={product.img} alt='error loading' className='img-fluid'/>
-          <img src={product.img} alt='error loading' className='img-fluid'/>
-          <img src={product.img} alt='error loading' className='img-fluid'/>
+          <img src={`http://localhost:8080${product.img}`} alt='error loading' className='img-fluid'/>
+          <img src={`http://localhost:8080${product.img}`} alt='error loading' className='img-fluid'/>
+          <img src={`http://localhost:8080${product.img}`} alt='error loading' className='img-fluid'/>
 
         </div>
         <div className='col-9 col-sm-9 col-md-9 productDisplayImage'>
-          <img src={product.img} alt='error loading' className='img-fluid' />
+          <img src={`http://localhost:8080${product.img}`} alt='error loading' className='img-fluid' />
         </div>
         </div>
       </div>
       <div className='col-md-5 col-sm-12 col-12 productDisplayRight '>
         <h1>{product.description}</h1>
         <div className='productDisplayRightStar'>
-          <FaStar style={{"color":"darksalmon"}}/>
+          <FaStar style={{"color":"darksalmon"}}/> 
           <FaStar style={{"color":"darksalmon"}}/>
           <FaStar style={{"color":"darksalmon"}}/>
           <FaStar style={{"color":"darksalmon"}}/>
@@ -46,7 +46,6 @@ const ProductDisplay = (props) => {
         <button type='btn' className='border-0 my-3 px-5 py-2' onClick={()=>{addToCart(product.id)}} style={{ "backgroundColor": "darksalmon" }}>ADD TO CART</button>
         <p className='productDisplayRightCategory'><span className='fw-bold'>Category: </span> {product.category}, {product.subcategory}</p>
         <p className='productDisplayRightCategory'><span className='fw-bold'>Tags:</span> Modern, Latest</p>
-        {/* <p className='productDisplayRightDescription'></p> */}
       </div>
     </div>
   )

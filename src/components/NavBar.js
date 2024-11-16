@@ -77,13 +77,13 @@ export default function NavBar() {
                     </li>
                 </ul>
                 <Link to='/Cart' className='pe-2'>
-                  <button className='bg-transparent text-white border-0 position-relative'><CgShoppingCart/>
-                   <small><span className='NavCartCount position-absolute badge start-25 bg-light text-dark rounded-circle translate-middle' style={{"top":'5px',"backgroundColor":'rgba(255, 255, 255, 0.6)'}}>{getTotalCartItems()}</span></small>
+                  <button className='bg-transparent text-white border-0 position-relative'><CgShoppingCart className="fs-5" style={{"color":"darksalmon"}}/>
+                   <small><span className='NavCartCount position-absolute badge start-25 bg-light text-dark rounded-circle translate-middle' style={{"top":'5px',"backgroundColor":'rgba(255, 255, 255, 0.6)'}}>{ getTotalCartItems()}</span></small>
                   </button>
                 </Link>
                 <div className='dropdown me-4 btn-group'>
                   <button className="text-white border border-dark bg-transparent dropdown-toggle-split" type="button" id="DD" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-display="static">
-                    <CgProfile /></button>
+                    <CgProfile className="fs-5" style={{"color":"darksalmon"}}/></button>
                     <ul className='dropdown-menu dropdown-menu-end dropdown-menu-lg-start' aria-labelledby="DD">
                         <li><Link className='dropdown-item' to='/SignUpModal'>Sign Up</Link></li>
                         <li><Link className='dropdown-item' to='/Login'>Log In</Link></li>
